@@ -207,10 +207,10 @@
 	<!-- 성인<input type="number" name="acnt" max="10" min="0" onclick="humanChk()">
 	아이<input type="number" name="acnt" max="10" min="0" onclick="humanChk()"> -->
 
-	<p class="seat_ex" align="center">인원을 선택해 주세요.</p>
-	<div class="linej"><img alt="라인" src="${path }/img/alp/j.JPG" width="20"></div>
+	<p class="seat_ex" align="center">인원을 선택해 주세요.</p> 
 
-<div align="center">
+
+	<div align="center">
 	<label>성인</label>
 	<select id="numseat1" onchange="personcnt(1)">
 		<option value="0">0</option>
@@ -238,7 +238,7 @@
 </div>
 
 <div>
-	<div class="seat" id="seat" align="center">
+	<div class="seat" id="seat" align="left">
 		<img alt="라인" src="${path }/img/alp/a.JPG" width="20">
 		<button onclick="btnClick('A1')" value="A1" id="A1" class="cssbt"><font color="white">1</font></button>
 		<button onclick="btnClick('A2')" value="A2" id="A2" class="cssbt"><font color="white">2</font></button>&emsp;&emsp;
@@ -350,7 +350,15 @@
 		<br>
 
 	</div>
+	
 	<div class="col-lg-4 col-md-6" align="right">
+	<form action="payment" onSubmit="return reserveInform()" method="post" name="frm3">
+		<input type="hidden" name="msno_reid">
+		<input type="hidden" name="numAdult">
+		<input type="hidden" name="numTeenager">
+		<input type="hidden" name="numChild">
+		<input type="hidden" name="price">
+		<input type="hidden" name="numSeat" id="numSeat">
 			<div class="as-item">
 				<div class="as-pic">
 					<img src="${movie.mv_imageurl }" width="100" alt="">
@@ -367,52 +375,19 @@
 		    		<ul id="info2">
 		
 		    		</ul>
-					<a href="#" class="primary-btn">결제하기</a>
+		    		<p class="price">
+			<strong id="ticketTotalPrice"></strong>원
+		</p>
+		<div class="bt" align="center">
+			<!-- <button type="button" data-toggle="modal" data-target="#myModal2" class="btn btn-default"  style="background-color: #503396; color: white; border: 0;"> -->
+			<button class="primary-btn" type="submit">결제</button>
+			<a href="#" class="primary-btn">결제하기</a>
+		</div>
 				</div>
 			</div>
-		</div>
+		</form>
+	</div>
 </div>
-
-<div class="title2" id="title2">
-		    			</div>
-		    			<div class="title3" >
-		    				<ul class="info" id="title3_info">
-		    				</ul>
-		    				
-		    				<ul id="info3">
-		
-		    				</ul>
-		    				
-		    				<ul id="info2">
-		
-		    				</ul>
-		    					    				
-		    			</div>
-       <!--  <div class="col-lg-4 col-md-6">
-                <div class="as-item">
-                            <div class="as-pic">
-                                <img src="img/agents/agent-1.jpg" alt="">
-                                <div class="rating-point">
-                                    4.5
-                                </div>
-                            </div>
-                            <div class="as-text">
-                                <div class="at-title">
-                                    <h6>Ashton Kutcher</h6>
-                                    <div class="rating-star">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star-half-o"></i>
-                                    </div>
-                                </div>
-                                <ul>
-                                    <li>Property <span>215</span></li>
-                                    <li>Email <span>Kucher@gmail.com</span></li>
-                                    <li>Phone <span>123-455-688</span></li>
-                                </ul>
-                                <a href="#" class="primary-btn">결제하기</a>
-                            </div>
-                </div>
-         </div> -->
                     
 </body>
 </html>

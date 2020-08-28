@@ -110,7 +110,7 @@ B_DEL char(1),
 B_TYPE varchar2(50),
 B_CATEGORY varchar2(100)
 );
-insert into board values ('1','5','master','제목subject','내용content','3',null,null,null,'아이피주소',sysdate,'n','리뷰게시판','상영중');
+insert into board values ('1','제목','내용','2',sysdate,'n','master','5','리뷰게시판','상영중');
 select * from board;
 drop table board;
 

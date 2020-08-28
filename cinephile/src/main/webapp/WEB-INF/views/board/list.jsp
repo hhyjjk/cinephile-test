@@ -26,13 +26,13 @@
 				</tr>
 			</c:if>
 			<c:if test="${not empty list}">
-				<c:forEach var="board" items="${list }">
+				<c:forEach var="board" items="${list}">
 					<tr><td><%-- ${board.num} --%>${bNum} <c:set var="bNum" value="${bNum - 1}"></c:set></td>
-						 <c:if test="${board.bDel == 'y' }">
+<%-- 						 <c:if test="${board.bDel == 'y' }">
 							<td colspan="5">삭제된 글입니다</td>
 						</c:if> 
 						<c:if test="${board.bDel != 'y' }">
-							 <td title="${board.bContent}"> 
+							 <td title="${board.bContent}">  --%>
 								<!-- 답변글이면 --> 
 							<%-- <c:if test="${board.re_level > 0}">
 								<img src="${path}/img/level.gif" height="5"	width="${board.re_level * 10}"> 
@@ -48,7 +48,7 @@
 							<td>${board.bGood }</td>
 							<td>${board.bReadcount }</td>
 							<td colspan="2">${board.bRegdate }</td>
-						</c:if>
+					<%-- 	</c:if> --%>
 					</tr>
 				</c:forEach>
 			</c:if>

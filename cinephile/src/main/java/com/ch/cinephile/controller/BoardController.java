@@ -1,5 +1,7 @@
 package com.ch.cinephile.controller;
 import java.util.Collection;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,7 +32,9 @@ public class BoardController {
 		board.setStartRow(startRow);
 		board.setEndRow(endRow);
 //		Collection<Board> list = bs.list(startRow, endRow);
-		Collection<Board> list = bs.list(board);
+		List<Board> list = (List<Board>)bs.list(board);
+		System.out.println("size = "+list.size());
+		System.out.println("bdel="+list.get(0).getBDel());
 		PagingBean pb=new PagingBean(currentPage,rowPerPage,total);
 		String tit[] = {"작성자","제목","내용","제목+내용"};
 		model.addAttribute("list", list);
