@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="boardns">
+	<resultMap type="board" id="boardResult">
+		<result property="B_NUM" column="B_NUM" />
+		<result property="B_SUBJECT" column="B_SUBJECT" />
+		<result property="B_CONTENT" column="B_CONTENT" />
+		<result property="B_READCOUNT" column="B_READCOUNT" />
+		<result property="B_REF" column="B_REF" />
+		<result property="B_REGDATE" column="B_REGDATE" />
+		<result property="B_DEL" column="B_DEL" />
+		<result property="C_ID" column="C_ID" />
+		<result property="B_GOOD" column="B_GOOD" />
+		<result property="B_TYPE" column="B_TYPE" />
+		<result property="B_CATEGORY" column="B_CATEGORY" />
+		<result property="ref" column="ref" />
+		<result property="re_step" column="re_step" />
+		<result property="re_level" column="re_level" />
+		<result property="ip" column="ip" />
+		<!-- <result property="num" column="num" />
+		<result property="writer" column="writer" />
+		<result property="subject" column="subject" />
+		<result property="content" column="content" />
+		<result property="email" column="email" />
+		<result property="readcount" column="readcount" />
+		<result property="password" column="password" /> -->
+		<!-- <result property="del" column="del" /> -->
+	</resultMap>
+	<!-- 통합검색용 -->
+	<select id="rbList" parameterType="board"
+		resultMap="boardResult">
+		select * from (select * from board
+		<where>
+			b_type = '리뷰' and
+			<if test="keyword != null">
+				b_subject like '%'||#{keyword}||'%'
+				or
+				b_content like '%'||#{keyword}||'%'
+			</if>
+		</where>
+		)
+		order by b_good desc)
+	</select>
+	<select id="getTotal" parameterType="board" resultType="int">
+		select count(*) from board1
+		<where>
+			<if test="keyword!=null and keyword!=''">
+				<if test="search=='subcon'">
+					subject like '%'||#{keyword}||'%' or
+					content like
+					'%'||#{keyword}||'%'
+				</if>
+				<if test="search!='subcon'">
+					${search} like '%'||#{keyword}||'%'
+				</if>
+			</if>
+		</where>
+	</select>
+	<!-- <select id="list" parameterType="map" resultMap="boardResult"> select 
+		* from (select a.*,rowNum rn from ( select * from board1 order by ref desc, 
+		re_step) a) where rn between #{startRow} and #{endRow} </select> -->
+	<!-- #은 값 문자('대박') $은 키 변수 writer -->
+	<select id="list" parameterType="board" resultMap="boardResult">
+		select * from (select a.*,rowNum rn from (
+		select * from board1
+		<where>
+			<if test="keyword!=null and keyword!=''">
+				<if test="search=='subcon'">
+					subject like '%'||#{keyword}||'%' or
+					content like
+					'%'||#{keyword}||'%'
+				</if>
+				<if test="search!='subcon'">
+					${search} like '%'||#{keyword}||'%'
+				</if>
+			</if>
+		</where>
+		order by ref desc, re_step) a)
+		where rn between #{startRow} and #{endRow}
+	</select>
+	<select id="maxNum" resultType="integer">
+		select nvl(max(B_NUM),0) + 1 from board1
+	</select>
+	<insert id="insert" parameterType="board">
+		<!-- 입력하기 전에 키값을 자동 생산하기 위해 사용 -->
+		<!--<selectKey keyProperty="num" order="BEFORE" resultType="int"> select 
+			nvl(max(num),0) + 1 from board1 </selectKey> -->
+		insert into board1 values (#{B_NUM},#{B_SUBJECT},#{B_CONTENT},#{B_REF},sysdate,'n',#{C_ID},#{B_TYPE},#{B_CATEGORY},#{ref},#{re_step},#{re_level},#{ip})
+	</insert>
+	<update id="updateReadCount" parameterType="int">
+		update board1 set B_READCOUNT = B_READCOUNT + 1 where B_NUM=#{B_NUM}
+	</update>
+	<update id="updateStep" parameterType="board">
+		update board1 set re_step = re_step + 1
+		where ref=#{ref} and re_step > #{re_step}
+	</update>
+	<select id="select" parameterType="integer" resultType="board">
+		select * from board1 where B_NUM=#{B_NUM}
+	</select>
+	<update id="update" parameterType="board">
+		update board1 set B_SUBJECT=#{B_SUBJECT}, C_ID=#{C_ID},B_CONTENT=#{B_CONTENT} where B_NUM=#{B_NUM}
+	</update>
+	<update id="delete" parameterType="integer">
+		update board1 set B_DEL='y' where B_NUM=#{B_NUM}
+	</update>
+</mapper>

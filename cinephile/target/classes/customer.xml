@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="customerns">
+<resultMap type="customer" id="customerResult">
+	<result property="c_id" column="c_id"/>
+	<result property="c_password" column="c_password"/>
+	<result property="c_name" column="c_name"/>
+	<result property="c_address" column="c_address"/>
+	<result property="c_tel" column="c_tel"/>
+	<result property="c_email" column="c_email"/>
+	<result property="c_del" column="c_del"/>
+	<result property="c_regdate" column="c_regdate"/>
+	<result property="c_nickname" column="c_nickname"/>
+	<!-- <result property="c_proimg" column="c_proimg"/>
+	<result property="c_headerimg" column="c_headerimg"/>
+	<result property="c_probio" column="c_probio"/> -->
+</resultMap>
+	<select id="selectCid" parameterType="string" resultType="customer">
+		select * from customer1 where c_id=#{c_id} or c_nickname=#{c_nickname}
+	</select>
+	
+	<select id="insert" parameterType="customer">
+		insert into customer1 values (#{c_id},#{c_password},#{c_name},#{c_address},#{c_tel},#{c_email},'n',sysdate,#{c_nickname},null,null,null)
+	</select>
+	<select id="getCustomerList" parameterType="Integer" resultMap="customerResult">
+		SELECT * FROM 
+				(SELECT ROWNUM RN, N.* FROM 
+					(SELECT * FROM customer1 ORDER BY c_id DESC) N
+				) WHERE RN BETWEEN 1 + (#{start}-1)*10 AND 10 + (#{start}-1)*10
+	</select>
+	<select id="getTotalCustomer" resultType="Integer">
+		select count(*) from customer1
+	</select>
+</mapper>

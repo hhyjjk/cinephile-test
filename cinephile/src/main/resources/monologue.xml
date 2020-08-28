@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="monologuens">
+<resultMap type="monologue" id="monologueResult">
+	<result property="mo_num" column="mo_num"/>
+	<result property="c_id" column="c_id"/>
+	<result property="mo_content" column="mo_content"/>
+	<result property="mo_good" column="mo_good"/>
+	<result property="mo_regdate" column="mo_regdate"/>
+	<result property="mo_del" column="mo_del"/>
+</resultMap>
+	<insert id="write" parameterType="monologue">
+		insert into monologue values(monologue_seq.nextval,#{c_id},#{mo_content},0,sysdate,'n')
+	</insert>
+	<select id="getForCid" parameterType="string" resultMap="monologueResult">
+		select * from monologue where c_id=#{c_id}
+	</select>
+	<select id="searchHot" resultMap="monologueResult">
+		select * from (select a.*, rowNum rn from (select * from monologue where mo_regdate> TO_CHAR(SYSDATE - 30,'YYYYMMDD') and mo_del='n' order by mo_good desc, mo_regdate desc) a) where rn between 1 and 50
+	</select>
+	<update id="goodup" parameterType="int">
+		update monologue set mo_good=mo_good+1 where mo_num=#{mo_num}
+	</update>
+	<update id="gooddown" parameterType="int">
+		update monologue set mo_good=mo_good-1 where mo_num=#{mo_num}
+	</update>
+</mapper>

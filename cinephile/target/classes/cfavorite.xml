@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cfavoritens">
+<resultMap type="cfavorite" id="cfavoriteResult">
+	<result property="mv_num" column="mv_num"/>
+	<result property="zip_num" column="zip_num"/>
+</resultMap>
+	<insert id="insert" parameterType="cfavorite">
+		insert into cfavorite values(#{mv_num},#{zip_num})
+	</insert>
+	<select id="getCustomer" parameterType="int" resultType="int">
+		select mv_num from cfavorite where zip_num=#{zip_num}
+	</select>
+	<select id="ckChoice" parameterType="cfavorite" resultType="cfavorite">
+		select * from cfavorite where mv_num=#{mv_num} and zip_num=#{zip_num}
+	</select>
+	<delete id="delete" parameterType="cfavorite">
+		delete cfavorite where mv_num=#{mv_num} and zip_num=#{zip_num}
+	</delete>
+</mapper>

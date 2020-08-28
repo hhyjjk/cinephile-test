@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="moviens">
+<resultMap type="movie" id="movieResult">
+	<result property="mv_num" column="mv_num"/>
+	<result property="mv_name" column="mv_name"/>
+	<result property="mv_direct" column="mv_direct"/>
+	<result property="mv_genre" column="mv_genre"/>
+	<result property="mv_content" column="mv_content"/>
+	<result property="mv_mjactor" column="mv_mjactor"/>
+	<result property="mv_minactor" column="mv_minactor"/>
+	<result property="mv_reldate" column="mv_reldate"/>
+	<result property="mv_rate" column="mv_rate"/>
+	<result property="mv_runtime" column="mv_runtime"/>
+	<result property="mv_imageurl" column="mv_imageurl"/>
+</resultMap>
+	<select id="searchMovie" parameterType="string" resultMap="movieResult">
+		select * from movie where mv_name=#{mv_name}
+	</select>
+	<select id="searchMoviee" parameterType="string" resultType="movie">
+		select * from movie where mv_name=#{mv_name}
+	</select>
+	<insert id="insertMovie" parameterType="movie">
+		insert into movie values(#{mv_num},#{mv_name},#{mv_direct},#{mv_genre},#{mv_content},#{mv_mjactor},#{mv_minactor},#{mv_reldate},#{mv_rate},#{mv_runtime},#{mv_imageurl})
+	</insert>
+	<select id="getMovie" parameterType="integer" resultType="movie">
+		select * from movie where mv_num=#{mv_num}
+	</select>
+	<select id="searchMovienum" parameterType="int" resultType="movie">
+		select * from movie where mv_num=#{mv_num}
+	</select>
+</mapper>
