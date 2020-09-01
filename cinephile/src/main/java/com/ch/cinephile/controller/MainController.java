@@ -17,8 +17,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ch.cinephile.model.Cfavorite;
+import com.ch.cinephile.model.Favoritezip;
 import com.ch.cinephile.model.Mogoodck;
 import com.ch.cinephile.model.Monologue;
+import com.ch.cinephile.model.Movie;
+import com.ch.cinephile.service.CfavoriteService;
+import com.ch.cinephile.service.CustomerService;
+import com.ch.cinephile.service.FavoritezipService;
 import com.ch.cinephile.service.MogoodckService;
 import com.ch.cinephile.service.MonologueService;
 import com.ch.cinephile.service.MovieService;
@@ -32,6 +37,12 @@ public class MainController {
 	private MonologueService mls;
 	@Autowired
 	private MogoodckService mgs;
+	@Autowired
+	private FavoritezipService fs;
+	@Autowired
+	private CfavoriteService cs;
+	@Autowired
+	private CustomerService cus;
 	@RequestMapping("/main")
 	public String main(Model model,HttpSession session) throws IOException {
 		//ms.getMovieRank();
@@ -115,6 +126,18 @@ public class MainController {
 			}
 			model.addAttribute("mogoodList", mogoodList);
 		}
+		//취향집 인기순
+		List<Favoritezip> faList=fs.searchHot();
+		//한사람 랜덤으로 취향집에 저장된 영화 목록 가져오기
+		int random=(int)(Math.random()*faList.size());
+		int zipnum=faList.get(random).getZip_num();
+		String fid=fs.getId(zipnum);
+		String nickname=cus.getNickname(fid);
+		List<Integer> CfList=cs.selectZipnum(zipnum);
+		//mvnum으로 영화 이미지 가져오기
+		List<Movie> favmList=ms.getImgurl(CfList);
+		model.addAttribute("favmList", favmList);
+		model.addAttribute("nickname", nickname);
 		return "main";
 	}
 	@RequestMapping("/main2")
