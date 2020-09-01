@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ch.cinephile.dao.MovieDao;
+import com.ch.cinephile.model.Cfavorite;
 import com.ch.cinephile.model.Movie;
 
 @Service
@@ -29,5 +30,9 @@ public class MovieServiceImpl implements MovieService{
 	@Override
 	public Movie searchMovienum(int mv_num) {
 		return md.searchMovienum(mv_num);
+	}
+	@Override
+	public List<Movie> getImgurl(List<Integer> cfList) {
+		return md.getImgurl(cfList);
 	}
 }

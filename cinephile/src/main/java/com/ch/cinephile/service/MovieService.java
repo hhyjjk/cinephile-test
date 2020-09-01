@@ -2,6 +2,7 @@ package com.ch.cinephile.service;
 
 import java.util.List;
 
+import com.ch.cinephile.model.Cfavorite;
 import com.ch.cinephile.model.Movie;
 
 public interface MovieService {
@@ -15,5 +16,7 @@ public interface MovieService {
 	Movie getMovie(Integer integer);
 
 	Movie searchMovienum(int mv_num);
+
+	List<Movie> getImgurl(List<Integer> cfList);
 
 }
