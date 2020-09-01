@@ -29,4 +29,7 @@ public class CustomerServiceImpl implements CustomerService {
 	public int getTotalCustomer() {
 		return cd.getTotalCustomer();
 	}
+	public String getNickname(String fid) {
+		return cd.getNickname(fid);
+	}
 }
