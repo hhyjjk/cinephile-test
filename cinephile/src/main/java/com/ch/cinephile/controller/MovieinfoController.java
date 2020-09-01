@@ -178,12 +178,13 @@ public class MovieinfoController {
 		}
 		Movie movie=ms.searchMoviee(mv_name);
 		model.addAttribute("movie", movie);
-		model.addAttribute("mv_name", mv_name);
+		//model.addAttribute("mv_name", mv_name);
 		model.addAttribute("cgv", cgv);
 		model.addAttribute("cgvList", cgvList);
 		model.addAttribute("dateList", dateList);
 		model.addAttribute("movieList", movieList);
 		model.addAttribute("timeList", timeList);
+		model.addAttribute("date", date);
 		return "movie/reserve";
 	}
 	
