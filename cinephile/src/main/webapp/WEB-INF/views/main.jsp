@@ -14,6 +14,26 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800,900&display=swap"
         rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,900&display=swap" rel="stylesheet">
+    
+<style type="text/css">
+#Hz {
+   width:100%;
+}
+#Hz img {
+    float:left;
+    display:block;
+    max-width:49%;
+    width:250;
+    height:auto;
+}
+#Hz img:last-child {
+    float:right;
+    display:block;
+}
+.clearfix {
+   clear:both;
+}​
+</style>
 </head>
 
 <body>		
@@ -29,6 +49,7 @@
             <c:if test="${not empty imageList}">
 			<c:forEach var="board" items="${imageList}" varStatus="status">
                 <div class="hs-item set-bg" data-setbg="${board}" style="cursor: pointer;" onclick="location.href='movieInfo?mv_num=${codeList[status.index] }&mv_name=${nameList[status.index] }'"> <!-- img/hero/hero-1.jpg -->
+					<img alt="" src="${board}" height="800">
 					<div class="row">
                     	<div class="col-md-12">
                         	<%-- <div class="col-md-6">
@@ -90,8 +111,33 @@
                  </form>
         </div>
     </section>
-    <!-- Testimonial Section End -->
 
+<!-- 이미지 연습 -->
+${nickname }님의 취향집
+	<div id="Hz">
+<c:if test="${not empty favmList }">
+	<c:forEach var="movielist" items="${favmList }" end="6">
+    	<img src="${movielist.mv_imageurl }" width="10"> 
+	</c:forEach>
+	<button value="더보기"></button>
+</c:if>
+   <div class="clearfix"></div>
+	</div>
+<!--  -->
+
+ <section class="categories-section">
+${nickname }님의 취향집
+        <div class="cs-item-list">
+        <c:if test="${not empty favmList }">
+        	<c:forEach var="movielist" items="${favmList }">
+ 				<div class="cs-item set-bg">
+        		<img alt="" src="${movielist.mv_imageurl }" >
+            </div>
+ 			</c:forEach>
+         </c:if>
+        </div>
+    </section>
+    
     <!-- Chooseus Section Begin -->
     <section class="chooseus-section spad set-bg" data-setbg="img/chooseus/chooseus-bg.jpg">
         <div class="container">
@@ -118,6 +164,7 @@
             </div>
         </div>
     </section>
+    <br><br><br><br><br><br><br><br><br><br><br><br>
     <!-- Chooseus Section End -->
     <!-- Testimonial Section Begin -->
     <section class="testimonial-section spad">

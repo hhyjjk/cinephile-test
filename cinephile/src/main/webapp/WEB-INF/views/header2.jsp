@@ -29,7 +29,23 @@
     <link rel="stylesheet" href="${path}/css/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="${path}/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="${path}/css/style.css" type="text/css">
-
+	<!-- Js Plugins -->
+    <script src="${path}/js/jquery-3.3.1.min.js"></script>
+    <script src="${path}/js/bootstrap.min.js"></script>
+    <script src="${path}/js/jquery.magnific-popup.min.js"></script>
+    <script src="${path}/js/mixitup.min.js"></script>
+    <script src="${path}/js/jquery-ui.min.js"></script>
+    <script src="${path}/js/jquery.nice-select.min.js"></script>
+    <script src="${path}/js/jquery.slicknav.js"></script>
+    <script src="${path}/js/owl.carousel.min.js"></script>
+    <script src="${path}/js/jquery.richtext.min.js"></script>
+    <script src="${path}/js/image-uploader.min.js"></script>
+    <script src="${path}/js/main.js"></script>
+    <!-- font-auesome -->
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" />
+	
+<!-- 로그인 체크 -->
+<c:set var="nowid" value="${sessionScope.c_id }"/>
 <!-- Offcanvas Menu Wrapper Begin -->
     <div class="offcanvas-menu-overlay"></div>
     <div class="offcanvas-menu-wrapper">
@@ -74,7 +90,15 @@
                                 <li><i class="icon_mail_alt"></i> Aler.support@gmail.com</li>
                                 <li><i class="fa fa-mobile-phone"></i> 125-711-811 <span>125-668-886</span></li>
                             </ul>
-                            <a href="joinForm" class="hw-btn">회원가입</a>
+                             <c:if test="${empty nowid }">
+                            	<a href="loginForm" class="hw-btn">로그인</a>
+                            	<a href="joinForm" class="hw-btn">회원가입</a>
+							
+							</c:if>
+                            <c:if test="${not empty nowid }">
+                            	<a href="profileMain?c_id=${nowid }" class="hw-btn">개인정보</a>
+                            	<a href="" class="hw-btn">로그아웃</a>
+							</c:if>
                         </div>
                     </div>
                 </div>
