@@ -40,4 +40,7 @@ public class CfavoriteDaoImpl implements CfavoriteDao{
 		cf.setZip_num(zipnum);
 		sst.delete("cfavoritens.delete", cf);
 	}
+	public List<Integer> selectZipnum(int zipnum) {
+		return sst.selectList("cfavoritens.selectZipnum", zipnum);
+	}
 }

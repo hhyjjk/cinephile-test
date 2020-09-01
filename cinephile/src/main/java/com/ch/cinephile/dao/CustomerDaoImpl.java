@@ -32,4 +32,7 @@ public class CustomerDaoImpl implements CustomerDao {
 	public int getTotalCustomer() {
 		return sst.selectOne("customerns.getTotalCustomer");
 	}
+	public String getNickname(String fid) {
+		return sst.selectOne("customerns.getNickname", fid);
+	}
 }

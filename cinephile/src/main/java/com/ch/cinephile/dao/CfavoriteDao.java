@@ -16,4 +16,6 @@ public interface CfavoriteDao {
 
 	void delete(int mv_num, int zipnum);
 
+	List<Integer> selectZipnum(int zipnum);
+
 }

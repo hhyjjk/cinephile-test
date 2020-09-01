@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.ch.cinephile.model.Cfavorite;
 import com.ch.cinephile.model.Movie;
 
 @Repository
@@ -28,5 +29,10 @@ public class MovieDaoImpl implements MovieDao{
 	@Override
 	public Movie searchMovienum(int mv_num) {
 		return sst.selectOne("moviens.searchMovienum", mv_num);
+	}
+	@Override
+	public List<Movie> getImgurl(List<Integer> cfList) {
+		
+		return sst.selectList("moviens.getImgurl", cfList);
 	}
 }

@@ -14,4 +14,6 @@ public interface CustomerDao {
 
 	int getTotalCustomer();
 
+	String getNickname(String fid);
+
 }
