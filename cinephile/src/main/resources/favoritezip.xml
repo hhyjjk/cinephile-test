@@ -13,4 +13,10 @@
 	<insert id="insert" parameterType="string">
 		insert into favoritezip values(favoritezip_seq.nextval,0,#{c_id})
 	</insert>
+	<select id="searchHot" resultMap="favoritezipResult">
+		select * from (select a.*, rowNum rn from (select * from favoritezip order by fz_good desc) a) where rn between 1 and 50
+	</select>
+	<select id="getId" parameterType="int" resultType="string">
+		select c_id from favoritezip where zip_num=#{zip_num}
+	</select>
 </mapper>
