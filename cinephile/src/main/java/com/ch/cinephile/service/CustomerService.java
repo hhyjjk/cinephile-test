@@ -13,5 +13,5 @@ public interface CustomerService {
 	List<Customer> getCustomerList(int start);
 
 	int getTotalCustomer();
-
+	String getNickname(String fid);
 }
