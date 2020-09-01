@@ -17,4 +17,11 @@ public class FavoritezipServiceImpl implements FavoritezipService{
 	public int selectZipnum(String c_id) {
 		return fd.selectZipnum(c_id);
 	}
+	public List<Favoritezip> searchHot() {
+		return fd.searchHot();
+	}
+	@Override
+	public String getId(int zipnum) {
+		return fd.getId(zipnum);
+	}
 }
