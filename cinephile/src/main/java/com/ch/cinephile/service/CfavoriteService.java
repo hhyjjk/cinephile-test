@@ -6,7 +6,8 @@ import com.ch.cinephile.model.Cfavorite;
 
 public interface CfavoriteService {
 
-	int selectZipnum(String id);
+	List<Integer> selectZipnum(int zipnum);
+	//int selectZipnum(int zipnum);
 
 	Cfavorite ckChoice(int mv_num, int zipnum);
 

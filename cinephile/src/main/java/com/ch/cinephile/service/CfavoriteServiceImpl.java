@@ -11,7 +11,7 @@ import com.ch.cinephile.model.Cfavorite;
 @Service
 public class CfavoriteServiceImpl implements CfavoriteService{
 	@Autowired
-	CfavoriteDao cd;
+	private CfavoriteDao cd;
 	public int selectZipnum(String id) {
 		return cd.selectZipnum(id);
 	}
@@ -27,5 +27,8 @@ public class CfavoriteServiceImpl implements CfavoriteService{
 	@Override
 	public void delete(int mv_num, int zipnum) {
 		cd.delete(mv_num,zipnum);
+	}
+	public List<Integer> selectZipnum(int zipnum) {
+		return cd.selectZipnum(zipnum);
 	}
 }
