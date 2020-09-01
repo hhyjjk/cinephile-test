@@ -13,6 +13,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias alias="rbd" type="com.ch.cinephile.model.ReplyBoard"/>
 		<typeAlias alias="monologue" type="com.ch.cinephile.model.Monologue"/>
 		<typeAlias alias="mogoodck" type="com.ch.cinephile.model.Mogoodck"/>
+		<typeAlias alias="book" type="com.ch.cinephile.model.Book"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="movie.xml" />
@@ -24,5 +25,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper	resource="rbd.xml" />
 		<mapper	resource="monologue.xml" />
 		<mapper	resource="mogoodck.xml" />
+		<mapper	resource="book.xml" />
 	</mappers>
 </configuration>
