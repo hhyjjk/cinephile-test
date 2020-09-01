@@ -173,7 +173,7 @@
 		//saveInfo.get("movieName");
 		//saveInfo.get("cinemaName");
 		
-		frm3.msno_reid.value = saveInfo.get("msno");
+		//frm3.msno_reid.value = saveInfo.get("msno");
 		frm3.numAdult.value = seatPerson.get("성인");
 		frm3.numTeenager.value = seatPerson.get("청소년");
 		frm3.numChild.value = seatPerson.get("어린이");
@@ -348,12 +348,13 @@
 		<button onclick="btnClick('J7')" value="J7" id="J7" class="cssbt">7</button>
 		<button onclick="btnClick('J8')" value="J8" id="J8" class="cssbt">8</button>
 		<br>
-
 	</div>
-	
 	<div class="col-lg-4 col-md-6" align="right">
 	<form action="payment" onSubmit="return reserveInform()" method="post" name="frm3">
-		<input type="hidden" name="msno_reid">
+		<input type="hidden" name="mv_num" value="${movie.mv_num}">
+		<input type="hidden" name="mv_name" value="${movie.mv_name}">
+		<input type="hidden" name="local" value="${cgvcode.local}">
+		<input type="hidden" name="date" value="${date}">
 		<input type="hidden" name="numAdult">
 		<input type="hidden" name="numTeenager">
 		<input type="hidden" name="numChild">
@@ -380,7 +381,7 @@
 		</p>
 		<div class="bt" align="center">
 			<!-- <button type="button" data-toggle="modal" data-target="#myModal2" class="btn btn-default"  style="background-color: #503396; color: white; border: 0;"> -->
-			<button class="primary-btn" type="submit">결제</button>
+			<button class="primary-btn" type="submit" style="border:none;">결제</button>
 			<a href="#" class="primary-btn">결제하기</a>
 		</div>
 				</div>

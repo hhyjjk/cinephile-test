@@ -36,7 +36,7 @@
 							</c:if>
 							<c:if test="${not empty cgvList }">
 								<c:forEach var="clocal" items="${cgvList }">
-									<li><a href="reserve?mv_name=${mv_name}&theatercode=${clocal.theatercode}&areacode=${clocal.areacode}&local=${clocal.local}">${clocal.local }</a></li>
+									<li><a href="reserve?mv_name=${movie.mv_name}&theatercode=${clocal.theatercode}&areacode=${clocal.areacode}&local=${clocal.local}">${clocal.local }</a></li>
 								</c:forEach>
 							</c:if>
                         </ul>
@@ -54,7 +54,7 @@
 							</c:if>
 							<c:if test="${not empty dateList }">
 								<c:forEach var="date" items="${dateList }">
-									<li><a href="reserve?mv_name=${mv_name}&theatercode=${cgv.theatercode}&areacode=${cgv.areacode}&local=${cgv.local}&date=${date}">${date }</a></li>
+									<li><a href="reserve?mv_name=${movie.mv_name}&theatercode=${cgv.theatercode}&areacode=${cgv.areacode}&local=${cgv.local}&date=${date}">${date }</a></li>
 								</c:forEach>
 							</c:if>
                         </ul>
@@ -83,7 +83,7 @@
                 </div>
             </div>
         </div>
-    	<span id="disp" onclick="location.href='reserveSeat?mv_name=${mv_name}&mv_imageurl=${movie.mv_imageurl} &theatercode=${cgv.theatercode}&areacode=${cgv.areacode}&local=${cgv.local}&date=${date}'" style="display:none" class="btn btn-success" value="좌석선택">좌석선택</span>
+    	<span id="disp" onclick="location.href='reserveSeat?mv_name=${movie.mv_name}&mv_num=${movie.mv_num }&mv_imageurl=${movie.mv_imageurl} &theatercode=${cgv.theatercode}&areacode=${cgv.areacode}&local=${cgv.local}&date=${date }'" style="display:none" class="btn btn-success" value="좌석선택">좌석선택</span>
     </section>
     
   
