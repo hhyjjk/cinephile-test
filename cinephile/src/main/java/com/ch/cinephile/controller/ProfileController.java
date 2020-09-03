@@ -44,7 +44,7 @@ public class ProfileController {
 		//모놀로그 찾기
 		List<Monologue> mlList=mls.getForCid(c_id);
 		model.addAttribute("mlList", mlList);
-		return "profile/main";
+		return "profile/profileMain";
 	}
 	@RequestMapping("profileOther")
 	public String profileOther(String c_id,Model model) {

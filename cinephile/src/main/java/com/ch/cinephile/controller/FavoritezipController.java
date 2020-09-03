@@ -2,6 +2,7 @@ package com.ch.cinephile.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -32,6 +33,7 @@ public class FavoritezipController {
 		Movie movie=ms.searchMovienum(mv_num);
 		String c_id=(String)session.getAttribute("c_id");
 		int zipnum=fs.selectZipnum(c_id);
+		System.out.println(zipnum);
 		Cfavorite cfavorite=cs.ckChoice(mv_num,zipnum);
 		String encodedParam = URLEncoder.encode(movie.getMv_name(), "UTF-8");
 		String url = "redirect:/movieInfo?mv_num="+mv_num+"&mv_name="+encodedParam;
@@ -45,10 +47,17 @@ public class FavoritezipController {
 		else{
 			cs.insert(mv_num,zipnum);
 		}
-		
 		//ModelAndView mav new ModelAndView();
 		//mav.setView(new RedirectView("/movieInfo?movie=movie"));
 		return new ModelAndView(url);
 		//return mav;
+	}
+	@RequestMapping("favoritemovie")
+	public String favoritemovie(String c_id,Model model) {
+		System.out.println("z");
+		int zipnum=fs.selectZipnum(c_id);
+		List<Integer> mvnumList=cs.selectZipnum(zipnum);
+		//List<Movie> mList=;
+		return "profile/favoritemovie";
 	}
 }
