@@ -8,7 +8,7 @@
 <title>프로필</title>
 </head>
 <body>
-<c:forEach var="movie" items="${mList }" varStatus="status">
+<c:forEach var="movie" items="${mList }" varStatus="status" end="5">
 	<a href="movieInfo?mv_num=${movie.mv_num }&mv_name=${movie.mv_name }"><img alt="" src="${movie.mv_imageurl }"></a>
 </c:forEach>
 
