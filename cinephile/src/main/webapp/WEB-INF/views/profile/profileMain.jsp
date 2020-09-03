@@ -5,20 +5,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>${customer.c_nickname }프로필</title>
+<title>프로필</title>
 </head>
 <body>
-${customer.c_nickname }님의 취향집
-<c:forEach var="movie" items="${mList }" varStatus="status">
+<c:forEach var="movie" items="${mList }" varStatus="status" end="5">
 	<a href="movieInfo?mv_num=${movie.mv_num }&mv_name=${movie.mv_name }"><img alt="" src="${movie.mv_imageurl }"></a>
-</c:forEach><button onclick="location.href=favoritemovie?c_id=${customer.c_id}" value="더보기">더보기</button>
+</c:forEach><button onclick="location.href=favoritemovie?c_id=${nowid}" value="더보기">더보기</button>
 
 <section class="testimonial-section spad">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title">
-                        <h4>${customer.c_nickname }님의 모놀로그</h4>
+                        <h4>나의 모놀로그</h4>
                     </div>
                 </div>
             </div>
@@ -26,6 +25,7 @@ ${customer.c_nickname }님의 취향집
             	<form action="monoWrite">
                         <div class="ti-text">
                         	${tlist.mo_content }
+                        	<input type="hidden" name="c_id" value="${nowid }">
                         </div>
                         <div class="ti-author">
                             <div class="ta-pic">
