@@ -138,6 +138,7 @@ public class MainController {
 		List<Movie> favmList=ms.getImgurl(CfList);
 		model.addAttribute("favmList", favmList);
 		model.addAttribute("nickname", nickname);
+		model.addAttribute("fid", fid);
 		return "main";
 	}
 	@RequestMapping("/main2")
