@@ -35,4 +35,7 @@ public class MovieDaoImpl implements MovieDao{
 		
 		return sst.selectList("moviens.getImgurl", cfList);
 	}
+	public List<Movie> getAllMovie(List<Integer> mvnumList) {
+		return sst.selectList("moviens.getAllMovie", mvnumList);
+	}
 }
