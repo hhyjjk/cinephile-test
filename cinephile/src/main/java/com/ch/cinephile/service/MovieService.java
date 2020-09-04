@@ -19,4 +19,6 @@ public interface MovieService {
 
 	List<Movie> getImgurl(List<Integer> cfList);
 
+	List<Movie> getAllMovie(List<Integer> mvnumList);
+
 }

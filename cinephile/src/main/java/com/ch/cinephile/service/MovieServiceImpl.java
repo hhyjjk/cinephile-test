@@ -35,4 +35,7 @@ public class MovieServiceImpl implements MovieService{
 	public List<Movie> getImgurl(List<Integer> cfList) {
 		return md.getImgurl(cfList);
 	}
+	public List<Movie> getAllMovie(List<Integer> mvnumList) {
+		return md.getAllMovie(mvnumList);
+	}
 }
