@@ -57,7 +57,8 @@ public class FavoritezipController {
 		System.out.println("z");
 		int zipnum=fs.selectZipnum(c_id);
 		List<Integer> mvnumList=cs.selectZipnum(zipnum);
-		//List<Movie> mList=;
+		List<Movie> mList=ms.getAllMovie(mvnumList);
+		model.addAttribute("mList", mList);
 		return "profile/favoritemovie";
 	}
 }
