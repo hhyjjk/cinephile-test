@@ -37,4 +37,11 @@
 		</foreach>
 		)
 	</select>
+	<select id="getAllMovie" parameterType="java.util.List" resultMap="movieResult">
+		select * from movie where mv_num in(
+		<foreach collection="list" item="item" separator=",">
+			 #{item}
+		</foreach>
+		)
+	</select>
 </mapper>
