@@ -113,13 +113,13 @@
     </section>
 
 <!-- 이미지 연습 -->
-${nickname }님의 취향집
+${nickname }님의 취향집${fid}
 	<div id="Hz">
 <c:if test="${not empty favmList }">
 	<c:forEach var="movielist" items="${favmList }" end="6">
     	<img src="${movielist.mv_imageurl }" width="10"> 
 	</c:forEach>
-	<button onclick="location.href=profileOther?c_id=${fid} " value="더보기">더보기</button>
+	<button onclick="location.href='profileOther?c_id=${fid}'" value="더보기">더보기</button>
 </c:if>
    <div class="clearfix"></div>
 	</div>

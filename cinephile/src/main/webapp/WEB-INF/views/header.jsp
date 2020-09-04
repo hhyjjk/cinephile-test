@@ -100,7 +100,7 @@
 							</c:if>
                             <c:if test="${not empty nowid }">
                             	<a href="profileMain?c_id=${nowid }" class="hw-btn">개인정보</a>
-							
+                            	<a href="logout" class="hw-btn">로그아웃</a>
 							</c:if>
                         </div>
                     </div>
