@@ -8,6 +8,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<c:forEach var="movie" items="${mList }">
+	${movie.mv_name } <img alt="" src="${movie.mv_imageurl }">
+</c:forEach>
 </body>
 </html>
