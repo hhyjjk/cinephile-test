@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ch.cinephile.model.Customer;
@@ -65,5 +66,16 @@ public class ProfileController {
 		
 		model.addAttribute("customer", customer);
 		return "profile/profileOther";
+	}
+	@RequestMapping("updateForm")
+	public String cusUpdateForm(String c_id,Model model) {
+		Customer customer=cts.select(c_id);
+		model.addAttribute("customer", customer);
+		return "profile/updateForm";
+	}
+	@RequestMapping("cusUpdate")
+	public String update() {
+		
+		return "profile/update";
 	}
 }

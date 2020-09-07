@@ -168,12 +168,17 @@ public class MovieinfoController {
 			for (int i = 2; i <= size + 1; i++) {
 				Elements ti = doc.select("li:nth-child("+movienum+") > div > div:nth-child("+i+") > div.info-timetable > ul > li > a");
 				String[] strarr = new String[ti.size()];
+				boolean ck=false;
 				for (int j = 0; j < ti.size(); j++) {
 					String time = ti.get(j).attr("data-playstarttime");
-					time = time.substring(0, 2) + ":" + time.substring(2, time.length());
-					strarr[j] = time;
+					if(!time.equals("")&&time!=null) {
+						ck=true;
+						time = time.substring(0, 2) + ":" + time.substring(2, time.length());
+						strarr[j] = time;
+					}
 				}
-				timeList.add(strarr);
+				if(ck)
+					timeList.add(strarr);
 			}
 		}
 		Movie movie=ms.searchMoviee(mv_name);

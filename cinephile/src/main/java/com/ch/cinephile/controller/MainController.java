@@ -141,6 +141,13 @@ public class MainController {
 		model.addAttribute("fid", fid);
 		return "main";
 	}
+	@RequestMapping("error")
+	public String error(Model model) {
+		String msg="에러가 발생했습니다.";
+		model.addAttribute("msg", msg);
+		return "error500";
+	}
+	
 	@RequestMapping("/main2")
 	public String main2(Model model) throws IOException {
 		//ms.getMovieRank();

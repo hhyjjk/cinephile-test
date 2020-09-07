@@ -10,7 +10,7 @@
 <body>
 ${customer.c_nickname }님의 취향집
 <c:if test="${not empty mList }">
-<c:forEach var="movie" items="${mList }" varStatus="status">
+<c:forEach var="movie" items="${mList }" varStatus="status" end="5">
 	<a href="movieInfo?mv_num=${movie.mv_num }&mv_name=${movie.mv_name }"><img alt="" src="${movie.mv_imageurl }"></a>
 </c:forEach><button onclick="location.href='favoritemovie?c_id=${customer.c_id}'" value="더보기">더보기</button>
 </c:if>
