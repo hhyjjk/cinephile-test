@@ -16,9 +16,7 @@
 		<constructor-arg index="0" ref="sqlSessionFactory" />
 	</bean>
 	<!-- DB연결 풀 -->
-	<bean id="dataSource"
-		class="com.mchange.v2.c3p0.ComboPooledDataSource"
-		destroy-method="close">
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
 		<property name="driverClass" value="${driver}" />
 		<property name="jdbcUrl" value="${url}" />
 		<property name="user" value="${userId}" />

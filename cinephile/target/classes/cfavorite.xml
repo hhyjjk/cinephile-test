@@ -18,4 +18,7 @@
 	<delete id="delete" parameterType="cfavorite">
 		delete cfavorite where mv_num=#{mv_num} and zip_num=#{zip_num}
 	</delete>
+	<select id="selectZipnum" parameterType="int" resultType="int">
+		select mv_num from cfavorite where zip_num=#{zip_num}
+	</select>
 </mapper>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bookns">
+<resultMap type="book" id="bookResult">
+	<result property="book_num" column="book_num"/>
+	<result property="c_id" column="c_id"/>
+	<result property="mv_num" column="mv_num"/>
+	<result property="book_cnt" column="book_cnt"/>
+	<result property="book_pay" column="book_pay"/>
+	<result property="book_loc" column="book_loc"/>
+	<result property="book_date" column="book_date"/>
+	<result property="book_humantype" column="book_humantype"/>
+	<result property="book_price" column="book_price"/>
+	<result property="mv_name" column="mv_name"/>
+	<result property="book_del" column="book_del"/>
+</resultMap>
+	<select id="insert" parameterType="book">
+		insert into book values(book_seq.nextval,#{c_id},#{mv_num},null,null,#{book_loc},sysdate,#{book_humantype},#{book_price},#{mv_name},'n')
+	</select>
+</mapper>
