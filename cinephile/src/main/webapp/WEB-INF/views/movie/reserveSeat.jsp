@@ -197,10 +197,6 @@
 		reserveClose();
 		
 	}
-	function humanChk() {
-		alert("z");
-		document.getElementById("maptemp").style.display = "";
-	}
 </script>
 </head>
 <body>
@@ -381,8 +377,8 @@
 		</p>
 		<div class="bt" align="center">
 			<!-- <button type="button" data-toggle="modal" data-target="#myModal2" class="btn btn-default"  style="background-color: #503396; color: white; border: 0;"> -->
-			<button class="primary-btn" type="submit" style="border:none;">결제</button>
-			<a href="#" class="primary-btn">결제하기</a>
+			<button class="primary-btn" type="submit" style="border:none;"><img alt="" src="${path }/img/payment_icon.png"> 카카오 결제</button>
+			<!-- <a href="#" class="primary-btn">결제하기</a>-->
 		</div>
 				</div>
 			</div>
