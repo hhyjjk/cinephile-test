@@ -81,7 +81,7 @@ public class CustomerController {
 	  public ModelAndView logout(HttpSession session) {
 		  session.removeAttribute("c_id");
 		  ModelAndView mav =new ModelAndView();
-		  mav.setView(new RedirectView("/main"));
+		  mav.setView(new RedirectView("main"));
 		  return mav;
 	  }
 			
