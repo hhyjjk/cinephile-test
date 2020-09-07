@@ -113,7 +113,7 @@
     </section>
 
 <!-- 이미지 연습 -->
-${nickname }님의 취향집${fid}
+${nickname }님의 취향집
 	<div id="Hz">
 <c:if test="${not empty favmList }">
 	<c:forEach var="movielist" items="${favmList }" end="6">
@@ -123,20 +123,6 @@ ${nickname }님의 취향집${fid}
 </c:if>
    <div class="clearfix"></div>
 	</div>
-<!--  -->
-
- <section class="categories-section">
-${nickname }님의 취향집
-        <div class="cs-item-list">
-        <c:if test="${not empty favmList }">
-        	<c:forEach var="movielist" items="${favmList }">
- 				<div class="cs-item set-bg">
-        		<img alt="" src="${movielist.mv_imageurl }" >
-            </div>
- 			</c:forEach>
-         </c:if>
-        </div>
-    </section>
     
     <!-- Chooseus Section Begin -->
     <section class="chooseus-section spad set-bg" data-setbg="img/chooseus/chooseus-bg.jpg">
