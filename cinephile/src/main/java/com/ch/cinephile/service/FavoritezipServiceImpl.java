@@ -1,9 +1,12 @@
 package com.ch.cinephile.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ch.cinephile.dao.FavoritezipDao;
+import com.ch.cinephile.model.Favoritezip;
 
 @Service
 public class FavoritezipServiceImpl implements FavoritezipService{

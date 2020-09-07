@@ -14,7 +14,7 @@ SELECT * FROM
 --monologue				
 create table monologue(
 mo_num number(38) primary key,
-c_id varchar2(100) references customer(c_id),
+c_id varchar2(100) references customer1(c_id),
 mo_content varchar2(500),
 mo_good number(38),
 mo_regdate date,
