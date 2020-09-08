@@ -87,7 +87,7 @@
                     <div class="col-lg-10">
                         <div class="ht-widget">
                             <ul>
-                                <li><i class="icon_mail_alt"></i> Aler.support@gmail.com</li>
+                                <li><i class="icon_mail_alt"></i> 글자</li>
                                 <li><i class="fa fa-mobile-phone"></i> 125-711-811 <span>125-668-886</span></li>
                             </ul>
                              <c:if test="${empty nowid }">
@@ -97,7 +97,7 @@
 							</c:if>
                             <c:if test="${not empty nowid }">
                             	<a href="profileMain?c_id=${nowid }" class="hw-btn">개인정보</a>
-                            	<a href="" class="hw-btn">로그아웃</a>
+                            	<a href="logout" class="hw-btn">로그아웃</a>
 							</c:if>
                         </div>
                     </div>

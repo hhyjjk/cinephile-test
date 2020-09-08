@@ -12,7 +12,7 @@
 <c:if test="${empty id }">
 	<script type="text/javascript">
 	alert("로그인이 필요합니다.")
-	history.go(-1);
+	location.href="loginForm";
 	</script>
 	</c:if>
 </body>
