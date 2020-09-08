@@ -16,4 +16,8 @@ public interface CustomerDao {
 
 	String getNickname(String fid);
 
+	String passwordChk(String c_id);
+
+	int update(Customer customer);
+
 }

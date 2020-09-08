@@ -22,17 +22,19 @@ public class CustomerDaoImpl implements CustomerDao {
 	public int insert(Customer customer) {
 		return sst.insert("customerns.insert",customer);
 	}
-
-	@Override
 	public List<Customer> getCustomerList(int start) {
 		return sst.selectList("customerns.getCustomerList",start);
 	}
-
-	@Override
 	public int getTotalCustomer() {
 		return sst.selectOne("customerns.getTotalCustomer");
 	}
 	public String getNickname(String fid) {
 		return sst.selectOne("customerns.getNickname", fid);
+	}
+	public String passwordChk(String c_id) {
+		return sst.selectOne("customerns.passwordChk", c_id);
+	}
+	public int update(Customer customer) {
+		return sst.update("customerns.update", customer);
 	}
 }
