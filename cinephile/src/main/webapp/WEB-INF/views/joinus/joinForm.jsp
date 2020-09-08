@@ -26,12 +26,12 @@ function addressOpen(){
             // 우편번호와 주소 정보를 해당 필드에 넣는다.
             document.getElementById('postcode').value = data.zonecode;
             document.getElementById("address").value = roadAddr;
-            document.getElementById("sample4_jibunAddress").value = data.jibunAddress;
+            document.getElementById("jibunAddress").value = data.jibunAddress;
             
             if(roadAddr !== ''){
-                document.getElementById("extraaddress").value = extraRoadAddr;
+                document.getElementById("extraAddress").value = extraRoadAddr;
             } else {
-                document.getElementById("extraaddress").value = '';
+                document.getElementById("extraAddress").value = '';
             }
 
             var guideTextBox = document.getElementById("guide");
@@ -145,7 +145,9 @@ function addressOpen(){
 	</div>
 </form>
 </div>
+<input type="hidden" id="jibunAddress">
 <span id="guide" style="color:#999;display:none"></span>
-<input type="hidden" id="extraaddress" >
+<input type="hidden" id="detailAddress">
+<input type="hidden" id="extraAddress">
 </body>
 </html>
