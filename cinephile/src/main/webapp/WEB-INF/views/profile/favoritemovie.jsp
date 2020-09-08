@@ -9,7 +9,8 @@
 </head>
 <body>
 <c:forEach var="movie" items="${mList }">
-	${movie.mv_name } <img alt="" src="${movie.mv_imageurl }">
+	<a href="movieInfo?mv_num=${movie.mv_num }&mv_name=${movie.mv_name }"><img alt="" src="${movie.mv_imageurl }"></a>
+	<!-- <img alt="" src="${movie.mv_imageurl }" onclick="location.href='movieInfo?mv_num=${movie.mv_num}&mv_name=${movie.mv_name }'"> -->
 </c:forEach>
 </body>
 </html>

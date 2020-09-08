@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ include file="../header2.jsp" %>
+<%@ include file="../header2.jsp" %>
+<%@include file="../loginsessionck.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,12 +27,12 @@ function addressOpen(){
             // 우편번호와 주소 정보를 해당 필드에 넣는다.
             document.getElementById('postcode').value = data.zonecode;
             document.getElementById("address").value = roadAddr;
-            document.getElementById("sample4_jibunAddress").value = data.jibunAddress;
+            document.getElementById("jibunAddress").value = data.jibunAddress;
             
             if(roadAddr !== ''){
-                document.getElementById("extraaddress").value = extraRoadAddr;
+                document.getElementById("extraAddress").value = extraRoadAddr;
             } else {
-                document.getElementById("extraaddress").value = '';
+                document.getElementById("extraAddress").value = '';
             }
 
             var guideTextBox = document.getElementById("guide");
@@ -52,16 +53,6 @@ function addressOpen(){
     }).open();
 }
 	
-	function idChk(){
-		if (!frm.c_id.value) { alert("아이디 필수 입력 후 중복체크바랍니다.");
-		frm.c_id.focus(); return false;
-		
-		}
-		$.post('idChk','c_id='+frm.c_id.value, function(data){
-			$('#disp').html(data);
-		});
-	}
-	
 	function nickChk(){
 		if (!frm.c_nickname.value) { alert("닉네임 필수 입력 후 중복체크바랍니다.");
 		frm.c_nickname.focus(); return false;
@@ -70,17 +61,21 @@ function addressOpen(){
 			$('#disp2').html(data);
 		});
 	}
-	function chk(){
-		if(frm.c_id.value.length < 4 || frm.c_id.value.length > 12 ){
-			
-			alert("아이디는 4 ~ 12 글자내로 입력해주세요");
-			frm.c_id.foucus();
-			return false;
+	function passChk(){
+		if (!frm.c_password2.value) {
+			alert("현재암호 필수 입력 후 암호확인바랍니다.");
+			frm.c_password2.focus(); return false;
 		}
+		$.post('passChk','c_password='+frm.c_password2.value+'&c_id='+frm.c_id.value, function(data){
+			$('#disp').html(data);
+		});
+	}
+	function chk(){
 		var reg_pw = /^.*(?=.{4,8})(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[@!#$*()_&]).*$/; 
 		if(!reg_pw.test(frm.c_password.value)){
 			alert("4 ~ 8자 영문 대 소문자, 숫자, 특수문자를 사용하세요.");
 			frm.c_password.focus();
+			frm.c_password.value="";
 			return false;
 		}
 		var reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
@@ -116,18 +111,19 @@ function addressOpen(){
 <table class="table table-boardered">
 <caption class="text-primary">개인정보 수정</caption>
 	<tr><td>아이디</td>
-	<td><input type="text" name="c_id" max="12" min="4" required="required" autofocus="autofocus">
-	<input type="button" onclick="idChk()" class="btn btn-info btn-sm" value="중복체크">* 4~12자 &nbsp;
-	<span id="disp" class="err"></span></td></tr>
+	<td><input type="text" name="c_id" max="12" min="4" readonly="readonly" value="${customer.c_id }"></td></tr>
 	<tr><td>닉네임</td>
-	<td><input type="text" name="c_nickname" required="required" >
+	<td><input type="text" name="c_nickname" required="required" value="${customer.c_nickname }">
 	<input type="button" onclick="nickChk()" class="btn btn-info btn-sm" value="중복체크">
-	<span id="disp2" class="err"></span></td></tr>
-	<tr><td>현재 암호</td><td><input type="password" name="c_password" max="12" min="4" required="required" >
-	 * 4~8자의 영문, 숫자, 특수문자( ! # $ * ( ) _ = |) 조합 </td></tr>
-	<tr><td>변경할 암호(공란가능)</td><td><input type="password" name="c_password2" max="12" min="4"></td></tr>
+	<span id="disp2" class="err"></span><span style=" font-size:small; color: red;">*현재 닉네임은 중복 사용 가능</span></td></tr>
+	<tr><td>현재 암호</td>
+	<td><input type="password" name="c_password2" max="12" min="4" required="required" >
+	<input type="button" onclick="passChk()" class="btn btn-info btn-sm" value="암호확인">
+	<span id="disp" class="err"></span></td></tr>
+	<tr><td>변경할 암호</td><td><input type="password" name="c_password" max="12" min="4" required="required">
+	* 4~8자의 영문, 숫자, 특수문자( ! # $ * ( ) _ = |) 조합 <span style=" font-size:small; color: red;">*변경하고싶지 않을시 현재 비밀번호</span> </td></tr>
 	<tr><td>이름</td><td><input type="text" name="c_name" required="required" value="${customer.c_name }"></td></tr>
-	<tr><td>우편번호</td><td><input type="text" id="postcode" readonly="readonly"></td></tr>
+	<tr><td>우편번호</td><td><input type="text" id="postcode" readonly="readonly">  </td></tr>
 	<tr><td>주소</td><td><input type="text" name="c_address" id="address" readonly="readonly" required="required" value="${customer.c_address }"><input type="button" onclick="addressOpen()" class="btn btn-info btn-sm" value="주소 검색"></td></tr>
 	<tr><td>전화번호</td><td><input type="tel" name="c_tel" required="required" value="${customer.c_tel }"></td></tr>
 	<tr><td>이메일</td><td><input type="email" name="c_email" required="required" value="${customer.c_email }">
@@ -136,11 +132,13 @@ function addressOpen(){
 	<div class="button">
 	<input type="submit" value="등록">&nbsp;
 	<input type="reset" value="취소">&nbsp;<a href="main.html"></a>
-	<a href="loginForm.html" class="btn btn-default">로그인</a>
 	</div>
 </form>
+
 </div>
+<input type="hidden" id="jibunAddress">
 <span id="guide" style="color:#999;display:none"></span>
-<input type="hidden" id="extraaddress" >
+<input type="hidden" id="detailAddress">
+<input type="hidden" id="extraAddress">
 </body>
 </html>
