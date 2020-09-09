@@ -15,13 +15,17 @@ import com.ch.cinephile.model.Book;
 import com.ch.cinephile.model.Cgvcode;
 import com.ch.cinephile.model.Movie;
 import com.ch.cinephile.service.BookService;
+import com.ch.cinephile.service.MovieService;
 
 @Controller
 public class ReserveController {
 	@Autowired
 	private BookService bs;
+	@Autowired
+	private MovieService ms;
 	@RequestMapping("/reserveSeat")
 	public String reserveSeat(Movie movie,Cgvcode cgvcode,String date,Model model) {
+		movie=ms.searchMovienum(movie.getMv_num());
 		//model.addAttribute("mv_name", movie.getMv_name());
 		model.addAttribute("cgvcode",cgvcode);
 		model.addAttribute("movie", movie);
@@ -33,14 +37,15 @@ public class ReserveController {
 		//private int book_cnt; 표갯수 사람수에 어차피 나옴
 		//private String book_pay; 결제 방법
 		//book.setBook_date(date); 결제 날짜 영화 상영일 나누기
-		//System.out.println(numSeat);//좌석표
+		System.out.println(numSeat);//좌석표
 		Book book=new Book();
 		book.setMv_num(movie.getMv_num());
 		book.setMv_name(movie.getMv_name());
 		book.setBook_price(Integer.parseInt(price));
 		book.setC_id((String)session.getAttribute("c_id"));
 		book.setBook_loc(local);
-		
+		//좌석 컬럼 따로 만들기
+		//book.setBook_cnt(book_numSeat);
 		//날짜 변환
 		SimpleDateFormat beforeFormat = new SimpleDateFormat("yyyymmdd");
 		SimpleDateFormat afterFormat = new SimpleDateFormat("yyyy-mm-dd");

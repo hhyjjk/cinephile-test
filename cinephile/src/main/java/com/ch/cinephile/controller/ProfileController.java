@@ -3,6 +3,8 @@ package com.ch.cinephile.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ch.cinephile.model.Book;
 import com.ch.cinephile.model.Customer;
 import com.ch.cinephile.model.Monologue;
 import com.ch.cinephile.model.Movie;
+import com.ch.cinephile.service.BookService;
 import com.ch.cinephile.service.CfavoriteService;
 import com.ch.cinephile.service.CustomerService;
 import com.ch.cinephile.service.FavoritezipService;
@@ -32,6 +36,8 @@ public class ProfileController {
 	private MonologueService mls;
 	@Autowired
 	private CustomerService cts;
+	@Autowired
+	private BookService bs;
 	@RequestMapping("profileMain")
 	public String profileMain(String c_id,Model model) {
 		//취향집 찾기
@@ -69,6 +75,13 @@ public class ProfileController {
 		
 		model.addAttribute("customer", customer);
 		return "profile/profileOther";
+	}
+	@RequestMapping("bookChk")
+	public String bookChk(HttpSession session, Model model) {
+		String c_id=(String) session.getAttribute("c_id");
+		List<Book> bList= bs.searchall(c_id);
+		model.addAttribute("bList", bList);
+		return "profile/bookChk";
 	}
 	@RequestMapping("updateForm")
 	public String cusUpdateForm(String c_id,Model model) {
