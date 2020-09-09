@@ -128,17 +128,18 @@ public class MainController {
 		}
 		//취향집 인기순
 		List<Favoritezip> faList=fs.searchHot();
-		//한사람 랜덤으로 취향집에 저장된 영화 목록 가져오기
-		int random=(int)(Math.random()*faList.size());
-		int zipnum=faList.get(random).getZip_num();
-		String fid=fs.getId(zipnum);
-		String nickname=cus.getNickname(fid);
-		List<Integer> CfList=cs.selectZipnum(zipnum);
-		//mvnum으로 영화 이미지 가져오기
-		List<Movie> favmList=ms.getImgurl(CfList);
-		model.addAttribute("favmList", favmList);
-		model.addAttribute("nickname", nickname);
-		model.addAttribute("fid", fid);
+		if(faList.size()!=0) {
+			//한사람 랜덤으로 취향집에 저장된 영화 목록 가져오기
+			int random=(int)(Math.random()*faList.size());
+			int zipnum=faList.get(random).getZip_num();
+			String fid=fs.getId(zipnum);
+			String nickname=cus.getNickname(fid);
+			List<Integer> CfList=cs.selectZipnum(zipnum);
+			List<Movie> favmList=ms.getImgurl(CfList);
+			model.addAttribute("favmList", favmList);
+			model.addAttribute("nickname", nickname);
+			model.addAttribute("fid", fid);
+		}
 		return "main";
 	}
 	@RequestMapping("error")
