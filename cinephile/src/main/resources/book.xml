@@ -18,4 +18,7 @@
 	<select id="insert" parameterType="book">
 		insert into book values(book_seq.nextval,#{c_id},#{mv_num},null,null,#{book_loc},sysdate,#{book_humantype},#{book_price},#{mv_name},'n')
 	</select>
+	<select id="searchAll" parameterType="string" resultMap="bookResult">
+		select * from book where c_id=#{c_id} order by book_date desc
+	</select>
 </mapper>
