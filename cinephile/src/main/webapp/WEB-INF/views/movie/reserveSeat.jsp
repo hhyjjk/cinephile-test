@@ -158,6 +158,13 @@
 		total = 0;
 		seatPerson.set("성인", 0 );
 		seatPerson.set("청소년",  0 );
+		var mapIter = seatInfo.entries();
+		var val = [];
+		while( val = mapIter.next().value){
+			alert(val[0]);
+			seatInfo.set(val[0], 'n');	
+			val[1] = 'n';
+		}
 		$('#info2 *').remove();
 		$('#info3 *').remove();
 		//initClickSeat();
