@@ -44,4 +44,19 @@
 		</foreach>
 		)
 	</select>
+	
+	
+	
+	
+	
+		<!-- 통합검색용 -->	
+	<select id="mvList" parameterType="movie" resultMap="movieResult">
+		select * from (select * from movie
+		<where>
+			<if test="keyword != null">
+				mv_name like '%'||#{keyword}||'%' or mv_content like	'%'||#{keyword}||'%'
+			</if>
+		</where>
+		)
+	</select>
 </mapper>

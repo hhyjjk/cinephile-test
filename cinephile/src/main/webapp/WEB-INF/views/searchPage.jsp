@@ -84,17 +84,62 @@
 	<section class="blog-section spad">
 		<div class="container">
 			<!-- 여기서부터 foreach적용 -->
+			<c:if test="${empty mvList }">
+			<h3>영화정보</h3>
+			<hr>
+			<div style="margin: 0 auto; width: 95%;">
+				<h5>조회 된 내용이 없습니다</h5>
+			</div>
+			<div style="height: 50;"></div>
+			</c:if>
+			<c:if test="${not empty mvList}">
+			<c:forEach var="mvList" items="${mvList }">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="blog-item-list">
+						<div class="blog-item">
+							<div class="bi-text">
+								<h3>영화정보</h3>
+								<hr>
+								<div style="margin: 0 auto; width: 95%;">
+								<h5>
+									<a href="movieInfo?mv_num=${codeList[status.index] }&mv_name=${nameList[status.index] }">${mvList.mv_name }</a>
+								</h5>
+								<ul>
+									<li>감독 <span>${mvList.mv_direct }</span></li>
+									<li>${mvList.mv_genre }</li>
+									<li>좋아요 개수</li>
+								</ul>
+								<p>${mvList.mv_content }</p>
+								<a href="${path}/list/pageNum/1" class="read-more">더보기  <i class="fa fa-arrow-right"></i></a>
+								</div>
+							</div>
+						</div>
+					</div>
+<!-- 					<div class="blog-pagination property-pagination ">
+						<a href="#">1</a> <a href="#">2</a> <a href="#">3</a> <a href="#"
+							class="icon">→</a>
+					</div> -->
+				</div>
+			</div>
+			</c:forEach>
+			</c:if>
+			<!-- 여기까지 foreach적용 -->
+		</div>
+ 		<div class="container">
+			<!-- 여기서부터 foreach적용 -->
 			<c:if test="${empty rbList }">
 			<h3>리뷰게시판</h3>
 			<hr>
 			<div style="margin: 0 auto; width: 95%;">
 				<h5>조회 된 내용이 없습니다</h5>
 			</div>
+			<div style="height: 50;"></div>
 			</c:if>
 			<c:if test="${not empty rbList}">
 			<c:forEach var="rbList" items="${rbList }">
 			<div class="row">
-				<div class="col-lg-8">
+				<div class="col-lg-12">
 					<div class="blog-item-list">
 						<div class="blog-item">
 							<div class="bi-text">
@@ -102,12 +147,12 @@
 								<hr>
 								<div style="margin: 0 auto; width: 95%;">
 								<h5>
-									<a href="bdContent?b_num=${rbList.b_num }">${rbList.b_subject }</a>
+									<a href="${path }/view/bNum/${rbList.b_num}">${rbList.b_subject }</a>
 								</h5>
 								<ul>
 									<li>작성자 <span>${rbList.c_id }</span></li>
 									<li>${rbList.b_regdate }</li>
-									<li>댓글 개수</li>
+									<li>좋아요 개수 <span>${rbList.b_good }</span></li>
 								</ul>
 								<p>${rbList.b_content }</p>
 								<a href="${path}/list/pageNum/1" class="read-more">더보기  <i class="fa fa-arrow-right"></i></a>
@@ -125,6 +170,7 @@
 			</c:if>
 			<!-- 여기까지 foreach적용 -->
 		</div>
+
 	</section>
 
 

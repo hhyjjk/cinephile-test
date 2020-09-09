@@ -1,5 +1,6 @@
 package com.ch.cinephile.service;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,5 +38,8 @@ public class MovieServiceImpl implements MovieService{
 	}
 	public List<Movie> getAllMovie(List<Integer> mvnumList) {
 		return md.getAllMovie(mvnumList);
+	}
+	public Collection<Movie> mvList(Movie movie) {
+		return md.mvList(movie);
 	}
 }

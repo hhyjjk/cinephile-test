@@ -14,4 +14,7 @@ public class Movie {
 	private float mv_rate;
 	private int mv_runtime;
 	private String mv_imageurl;
+	   // 검색용
+	   private String search;
+	   private String keyword;
 }
