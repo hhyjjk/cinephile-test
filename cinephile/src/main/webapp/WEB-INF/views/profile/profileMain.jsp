@@ -13,6 +13,7 @@
 	<img src="${path }/img/logo.png" width="100" alt="">
 	<div class="rating-point">${movie.mv_rate }</div>
 	<div class="btn btn-success" onclick="location.href='updateForm?c_id=${nowid}'">개인정보 수정</div><br>
+	<div class="btn btn-success" onclick="location.href='bookChk'">예매 내역 확인</div><br>
 </div>
 
 <c:if test="${not empty mList }">
