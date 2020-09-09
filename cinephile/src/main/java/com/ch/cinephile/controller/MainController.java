@@ -18,12 +18,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ch.cinephile.model.Cfavorite;
 import com.ch.cinephile.model.Favoritezip;
+import com.ch.cinephile.model.Fzgoodck;
 import com.ch.cinephile.model.Mogoodck;
 import com.ch.cinephile.model.Monologue;
 import com.ch.cinephile.model.Movie;
 import com.ch.cinephile.service.CfavoriteService;
 import com.ch.cinephile.service.CustomerService;
 import com.ch.cinephile.service.FavoritezipService;
+import com.ch.cinephile.service.FzgoodckService;
 import com.ch.cinephile.service.MogoodckService;
 import com.ch.cinephile.service.MonologueService;
 import com.ch.cinephile.service.MovieService;
@@ -43,6 +45,8 @@ public class MainController {
 	private CfavoriteService cs;
 	@Autowired
 	private CustomerService cus;
+	@Autowired
+	private FzgoodckService fgs;
 	@RequestMapping("/main")
 	public String main(Model model,HttpSession session) throws IOException {
 		//ms.getMovieRank();
@@ -141,7 +145,20 @@ public class MainController {
 			}
 			model.addAttribute("nickname", nickname);
 			model.addAttribute("fid", fid);
+			//로그인시 취향집 좋아요체크
+			if(c_id!=null&&!c_id.equals("")) {
+				String fzgood ="";
+				Fzgoodck fg=fgs.searchId(c_id);
+				if(fg!=null) {
+					fzgood="y";
+				}
+				else
+					fzgood="n";
+				System.out.println(fzgood);
+				model.addAttribute("fzgood", fzgood);
+			}
 		}
+		
 		//mvnum으로 영화 이미지 가져오기
 		return "main";
 	}
