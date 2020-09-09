@@ -62,8 +62,7 @@ public class AdminController {
 		System.out.println(total);
 		int start = 1;
 		if (currentPage != null && !currentPage.equals(""))
-			;
-		start = Integer.parseInt(currentPage);
+			start = Integer.parseInt(currentPage);
 		/*
 		 * List<Customer> customerList = cs.getCustomerList(start);
 		 * 
@@ -76,6 +75,7 @@ public class AdminController {
 		System.out.println(pb);
 		/* model.addAttribute("customerList", customerList); */
 		model.addAttribute("pb", pb);
+		
 		return "admin/cinfoList";
 
 	}
