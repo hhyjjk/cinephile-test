@@ -21,35 +21,36 @@ public class BoardController {
 	}
 	@RequestMapping("/list/pageNum/{pageNum}")
 	public String list(@PathVariable String pageNum, Board board, Model model) {
-		if (pageNum == null || pageNum.equals("")) pageNum = "1";
-		int currentPage = Integer.parseInt(pageNum);
-		int rowPerPage  = 10;
-//		int total = bs.getTotal();
-		int total = bs.getTotal(board); 
-		int startRow = (currentPage - 1) * rowPerPage + 1;
-		int endRow = startRow + rowPerPage - 1;
-		int no = total - startRow + 1; // 페이지별 시작번호
-		board.setStartRow(startRow);
-		board.setEndRow(endRow);
-//		Collection<Board> list = bs.list(startRow, endRow);
-		List<Board> list = (List<Board>)bs.list(board);
-		System.out.println("size = "+list.size());
-		System.out.println("bdel="+list.get(0).getBDel());
-		PagingBean pb=new PagingBean(currentPage,rowPerPage,total);
-		String tit[] = {"작성자","제목","내용","제목+내용"};
-		model.addAttribute("list", list);
-		model.addAttribute("no", no);
-		model.addAttribute("pb", pb);
-		model.addAttribute("board", board);
-		model.addAttribute("tit", tit);
-		return "board/list";
-	}
+	      if (pageNum == null || pageNum.equals("")) pageNum = "1";
+	      int currentPage = Integer.parseInt(pageNum);
+	      int rowPerPage  = 10;
+//	      int total = bs.getTotal();
+	      int total = bs.getTotal(board);
+	      System.out.println(total);
+	      int startRow = (currentPage - 1) * rowPerPage + 1;
+	      int endRow = startRow + rowPerPage - 1;
+	      int no = total - startRow + 1; // 페이지별 시작번호
+	      board.setStartRow(startRow);
+	      board.setEndRow(endRow);
+//	      Collection<Board> list = bs.list(startRow, endRow);
+	      List<Board> list = (List<Board>)bs.list(board);
+	      System.out.println("size = "+list.size());
+	      //System.out.println("bdel="+list.get(0).getBDel());
+	      PagingBean pb=new PagingBean(currentPage,rowPerPage,total);
+	      String tit[] = {"작성자","제목","내용","제목+내용"};
+	      model.addAttribute("list", list);
+	      model.addAttribute("no", no);
+	      model.addAttribute("pb", pb);
+	      model.addAttribute("board", board);
+	      model.addAttribute("tit", tit);
+	      return "board/list";
+	   }
 	@RequestMapping("/insertForm/nm/{nm}/pageNum/{pageNum}")
 	public String insertForm(@PathVariable String nm, @PathVariable String pageNum, Model model) {
-		int ref = 0, re_level = 0, re_step = 0, bNum = 0;
+		int ref = 0, re_level = 0, re_step = 0, b_num = 0;
 		if (nm != null && !nm.equals("") && !nm.equals("null")) { // 답변글
-			bNum = Integer.parseInt(nm);
-			Board board = bs.select(bNum);
+			b_num = Integer.parseInt(nm);
+			Board board = bs.select(b_num);
 			// 답변글이 아니면 num과 ref는 같다
 			// 답변글은 읽은 글의 ref값을 답변글의 ref에 반영
 			ref = board.getRef();  
@@ -60,7 +61,7 @@ public class BoardController {
 		model.addAttribute("re_level", re_level);
 		model.addAttribute("re_step", re_step);
 		model.addAttribute("pageNum", pageNum);
-		model.addAttribute("bNum", bNum);
+		model.addAttribute("bNum", b_num);
 		
 		return "board/insertForm";
 	}
@@ -68,14 +69,14 @@ public class BoardController {
 	public String insert(Board board, String pageNum, Model model, HttpServletRequest request) {
 		board.setIp(request.getRemoteAddr()); // 작성자 ip
 		int number = bs.maxNum();
-		if (board.getBNum() != 0) {  // 답변글
+		if (board.getB_num() != 0) {  // 답변글
 			// re_step값을 정해
 			bs.updateStep(board);
 			// 읽은 글의 re_step과 re_level보다 1씩 증가
 			board.setRe_level(board.getRe_level() + 1);
 			board.setRe_step(board.getRe_step() + 1);			
 		} else board.setRef(number); // 답변글이 아닐 때
-		board.setBNum(number);
+		board.setB_num(number);
 		int result = bs.insert(board);
 		model.addAttribute("result", result);
 		model.addAttribute("pageNum", pageNum);
@@ -92,17 +93,17 @@ public class BoardController {
 	@RequestMapping("/updateForm/B_NUM/{B_NUM}/pageNum/{pageNum}")
 	public String updateForm(@PathVariable int bNum,@PathVariable String pageNum, Model model) {
 		Board board = bs.select(bNum);
-		String content = board.getBContent();
+		String content = board.getB_content();
 		String st =content.replace("<br>", "\r\n");
-		board.setBContent(st);
+		board.setB_content(st);
 		model.addAttribute("board", board);
 		model.addAttribute("pageNum", pageNum);
 		return "board/updateForm";
 	}
 	@RequestMapping("/update")
 	public String update(Board board, String pageNum, Model model) {
-		String st = board.getBContent().replace("\r\n", "<br>");
-		board.setBContent(st);
+		String st = board.getB_content().replace("\r\n", "<br>");
+		board.setB_content(st);
 		int result = bs.update(board);
 		model.addAttribute("result", result);
 		model.addAttribute("board", board);
@@ -122,5 +123,17 @@ public class BoardController {
 		model.addAttribute("result", result);
 		model.addAttribute("pageNum",pageNum);
 		return "board/delete";
+	}
+	
+	
+	
+	
+	//통합검색용
+	@RequestMapping("/view/bNum/{bNum}")
+	public String view(@PathVariable int bNum, Model model) {
+		bs.updateReadCount(bNum);
+		Board board = bs.select(bNum);
+		model.addAttribute("board", board);
+		return "board/view";
 	}
 }
