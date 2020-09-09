@@ -46,9 +46,9 @@ public class MainController {
 	@RequestMapping("/main")
 	public String main(Model model,HttpSession session) throws IOException {
 		//ms.getMovieRank();
-		String URL = "http://www.cgv.co.kr/movies/";
+		//String URL = "http://www.cgv.co.kr/movies/";
 		String NURL = "https://movie.naver.com/movie/running/current.nhn";
-		Document doc = Jsoup.connect(URL).get();
+		//Document doc = Jsoup.connect(URL).get();
 		Document ndoc = Jsoup.connect(NURL).get();
 		
 		Elements nimages = ndoc.select("#content > div.article > div > div.lst_wrap > ul > li > div > a");
@@ -135,11 +135,14 @@ public class MainController {
 			String fid=fs.getId(zipnum);
 			String nickname=cus.getNickname(fid);
 			List<Integer> CfList=cs.selectZipnum(zipnum);
-			List<Movie> favmList=ms.getImgurl(CfList);
-			model.addAttribute("favmList", favmList);
+			if(CfList.size()!=0) {
+				List<Movie> favmList=ms.getImgurl(CfList);
+				model.addAttribute("favmList", favmList);
+			}
 			model.addAttribute("nickname", nickname);
 			model.addAttribute("fid", fid);
 		}
+		//mvnum으로 영화 이미지 가져오기
 		return "main";
 	}
 	@RequestMapping("error")
