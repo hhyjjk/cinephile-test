@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ch.cinephile.model.Board;
+import com.ch.cinephile.model.Movie;
 import com.ch.cinephile.service.BoardService;
 import com.ch.cinephile.service.MovieService;
 
@@ -30,10 +31,16 @@ public class SearchController {
 	@Autowired
 	private BoardService bs;
 	@RequestMapping("t_search")
-	public String search(String s_keyword, Model model, Board board, HttpServletRequest request) {
-		board.setKeyword(s_keyword);
+	public String search(String keyword, Model model, Board board, Movie movie, HttpServletRequest request) {
+		//리뷰게시판 검색
+		board.setKeyword(keyword);
 		Collection<Board> rbList = bs.rbList(board);
 		model.addAttribute("rbList", rbList);
+		
+		//영화 검색
+		movie.setKeyword(keyword);
+		Collection<Movie> mvList = ms.mvList(movie);
+		model.addAttribute("mvList", mvList);
 		return "searchPage";
 	}
 }

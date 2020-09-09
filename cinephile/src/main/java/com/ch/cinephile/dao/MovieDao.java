@@ -1,5 +1,6 @@
 package com.ch.cinephile.dao;
 
+import java.util.Collection;
 import java.util.List;
 
 import com.ch.cinephile.model.Cfavorite;
@@ -20,5 +21,7 @@ public interface MovieDao {
 	List<Movie> getImgurl(List<Integer> cfList);
 
 	List<Movie> getAllMovie(List<Integer> mvnumList);
+
+	Collection<Movie> mvList(Movie movie);
 
 }

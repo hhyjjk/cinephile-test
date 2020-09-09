@@ -1,5 +1,6 @@
 package com.ch.cinephile.dao;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -37,5 +38,8 @@ public class MovieDaoImpl implements MovieDao{
 	}
 	public List<Movie> getAllMovie(List<Integer> mvnumList) {
 		return sst.selectList("moviens.getAllMovie", mvnumList);
+	}
+	public Collection<Movie> mvList(Movie movie) {
+		return sst.selectList("moviens.mvList", movie);
 	}
 }
