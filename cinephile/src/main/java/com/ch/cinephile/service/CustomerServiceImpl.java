@@ -21,15 +21,21 @@ public class CustomerServiceImpl implements CustomerService {
 	public int insert(Customer customer) {
 		return cd.insert(customer);
 	}
-	@Override
 	public List<Customer> getCustomerList(int start) {
 		return cd.getCustomerList(start);
 	}
-	@Override
 	public int getTotalCustomer() {
 		return cd.getTotalCustomer();
 	}
 	public String getNickname(String fid) {
 		return cd.getNickname(fid);
+	}
+	@Override
+	public String passwordChk(String c_id) {
+		return cd.passwordChk(c_id);
+	}
+	@Override
+	public int update(Customer customer) {
+		return cd.update(customer);
 	}
 }

@@ -112,7 +112,7 @@
         </div>
     </section>
 
-<!-- 이미지 연습 -->
+<!-- 취향집 시작 -->
 ${nickname }님의 취향집
 	<div id="Hz">
 <c:if test="${not empty favmList }">
@@ -124,7 +124,7 @@ ${nickname }님의 취향집
    <div class="clearfix"></div>
 	</div>
     
-    <!-- Chooseus Section Begin -->
+    <!-- 쓸데없는거 Section Begin -->
     <section class="chooseus-section spad set-bg" data-setbg="img/chooseus/chooseus-bg.jpg">
         <div class="container">
             <div class="row">
@@ -151,14 +151,15 @@ ${nickname }님의 취향집
         </div>
     </section>
     <br><br><br><br><br><br><br><br><br><br><br><br>
-    <!-- Chooseus Section End -->
-    <!-- Testimonial Section Begin -->
+    <!-- 쓸데없는거 Section End -->
+    
+    <!-- 모놀로그 Begin -->
     <section class="testimonial-section spad">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title">
-                        <h4>What our client says?</h4>
+                        <h4>모놀로그</h4>
                     </div>
                 </div>
             </div>

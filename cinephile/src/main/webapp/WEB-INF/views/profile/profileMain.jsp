@@ -39,6 +39,7 @@
                         <div class="ti-author">
                             <div class="ta-pic">
                                 <img src="img/testimonial-author/ta-1.jpg" alt="">
+                           		좋아요수:${tlist.mo_good }
                             </div>
                             <div class="ta-text">
                             </div>

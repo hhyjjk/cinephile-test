@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ch.cinephile.model.Customer;
 import com.ch.cinephile.model.Monologue;
@@ -45,6 +47,7 @@ public class ProfileController {
 		//모놀로그 찾기
 		List<Monologue> mlList=mls.getForCid(c_id);
 		model.addAttribute("mlList", mlList);
+		
 		return "profile/profileMain";
 	}
 	@RequestMapping("profileOther")
@@ -73,9 +76,33 @@ public class ProfileController {
 		model.addAttribute("customer", customer);
 		return "profile/updateForm";
 	}
-	@RequestMapping("cusUpdate")
-	public String update() {
-		
+	@RequestMapping(value="passChk",produces="text/html;charset=utf-8")
+	@ResponseBody public String passChk(String c_password,String c_id) {
+		String msg = ""; 
+		String nowpass = cts.passwordChk(c_id);
+		if (nowpass.equals(c_password))
+			msg="비밀번호가 맞습니다."; 
+		else
+			msg="비밀번호가 틀립니다."; 
+		return msg; 
+	}
+	@RequestMapping(value="cusUpdate",method=RequestMethod.POST)
+	public String update(Customer customer,String c_password2,Model model) {
+		int result=0;
+		Customer cus=cts.select(customer.getC_nickname());
+		if(cus!=null&&!cus.getC_id().equals(customer.getC_id())) {
+			result=-1;
+			model.addAttribute("result", result);
+			return "profile/update";
+		}
+		String nowpass = cts.passwordChk(customer.getC_id());
+		if (!nowpass.equals(c_password2)) {
+			result=-1;
+			model.addAttribute("result", result);
+			return "profile/update";
+		}
+		result=cts.update(customer);
+		model.addAttribute("result", result);
 		return "profile/update";
 	}
 }
